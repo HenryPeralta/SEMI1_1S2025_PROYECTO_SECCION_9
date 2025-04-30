@@ -110,19 +110,50 @@ h1 {
     background: #16a085;
 }
 
+/* Botón de editar */
+.tarea-actions .editar {
+    background: #3498db;
+}
+
+.tarea-actions .editar:hover {
+    background: #2980b9;
+}
+
 /* Tareas completadas */
 .tareas-list li.completed {
     background-color: #2d6a4f;
-    text-decoration: line-through;
     color: #ccc;
 }
 
-/* Inputs de edición */
-.tarea-edit {
-    background: #444;
-    border: 1px solid #666;
-    color: white;
-    padding: 5px;
-    border-radius: 5px;
+.modal-content {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Error form */
+.error {
+    color: #ff4d4d;
     font-size: 12px;
+    margin-top: -8px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .tareas-container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .tarea-form {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .tarea-form input {
+        width: 100%;
+    }
 }

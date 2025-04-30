@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Sidebar from "./Sidebar";
-import Tareas from "./tareas";
+import Tareas from "./Tareas";
 import Archivos from "./Archivos";
 import "../styles/Dashboard.css";
 
@@ -13,6 +13,7 @@ const Dashboard = ({ userId }) => {
             <div className="dashboard-content">
                 {section === "tareas" && <Tareas userId={userId} />}
                 {section === "archivos" && <Archivos userId={userId} />}
+                {section === "tradcutor" && <Traductor userId={userId}/>}
             </div>
         </div>
     );
