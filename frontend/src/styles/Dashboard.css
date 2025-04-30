@@ -1,0 +1,17 @@
+#root {
+    height: 100%;
+    width: 100%;
+}
+
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgb(48, 49, 51);
+}
+
+.dashboard-content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
