@@ -1,0 +1,80 @@
+.traductor-container {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.traductor-container h2,
+.traductor-container h3 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.traductor-container input[type="file"] {
+    display: block;
+    background: #3a3a3a;
+    color: #ffffff;
+    border: 1px solid #555;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin: 10px auto;
+    width: 100%;
+    max-width: 400px;
+}
+
+.traductor-container button {
+    display: block;
+    background-color: #ff9f43;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin: 10px auto;
+}
+
+.traductor-container button:hover {
+    background-color: #ff6b00;
+}
+
+.error-message {
+    color: #ff4d4d;
+    text-align: center;
+}
+
+.texto {
+    background-color: #3a3a3a;
+    padding: 15px;
+    border-radius: 5px;
+    white-space: pre-wrap;
+    font-size: 14px;
+    line-height: 1.5;
+    border: 1px solid #444;
+    margin: 10px 0;
+}
+
+audio {
+    display: block;
+    margin: 20px auto;
+    width: 100%;
+    max-width: 400px;
+}
+
+@media (max-width: 600px) {
+    .traductor-container {
+        padding: 10px;
+    }
+
+    .traductor-container input[type="file"],
+    .traductor-container button,
+    audio {
+        width: 100%;
+    }
+}
