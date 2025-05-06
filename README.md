@@ -60,9 +60,22 @@ Amazon API Gateway expone estas funciones serverless a través de endpoints HTTP
 
 ---
 
-## Presupuesto
+## Presupuesto mensual
 
-![Budget](/IMG/BD.jpeg)
+| Servicio         | Tipo / Configuración Estimada                            | Costo Mensual Aproximado (USD) |
+|------------------|-----------------------------------------------------------|-------------------------------:|
+| **EC2**          | t3.micro (750 hrs) con Amazon Linux                      | $10.00                         |
+| **ELB**          | 1 Load Balancer + tráfico estimado                       | $18.00                         |
+| **RDS**          | db.t3.micro + 20GB de almacenamiento                     | $15.00                         |
+| **S3**           | 10GB almacenamiento + peticiones                         | $2.00                          |
+| **Lambda**       | 1M ejecuciones + 400K GB-s                               | $1.00                          |
+| **API Gateway**  | 1M llamadas HTTP                                         | $3.50                          |
+| **IAM**          | Roles y políticas (sin costo directo)                    | $0.00                          |
+| **Translate**    | 1 millón de caracteres traducidos                        | $15.00                         |
+| **Polly**        | 1 millón de caracteres sintetizados                      | $4.00                          |
+| **Rekognition**  | 1,000 imágenes procesadas                                | $1.00                          |
+| **SES**          | 10,000 correos enviados                                  | $1.00                          |
+| **Total Aproximado** |                                                   | **$70.50 USD**                 |
 
 ---
 
