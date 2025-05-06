@@ -91,7 +91,7 @@ const Archivos = () => {
 
     if (mimeType === "text/plain" || mimeType === "application/pdf") {
       try {
-        const response = await fetch("https://apicargararchivos.azure-api.net/funcionCargarImangen/CargarArchivo", {
+        const response = await fetch("https://3sqpcxdhn2.execute-api.us-east-1.amazonaws.com/cargar_archivo", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -141,7 +141,7 @@ const Archivos = () => {
       }
     } else if (mimeType.startsWith("image/")) {
       try {
-        const response = await fetch("https://apicargararchivos.azure-api.net/funcionCargarImangen/CargarImagen", {
+        const response = await fetch("https://ijws8hewm2.execute-api.us-east-1.amazonaws.com/cargar_imagen", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
