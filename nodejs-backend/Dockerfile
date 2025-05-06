@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Exponer el puerto 3000
-EXPOSE 3000
+EXPOSE 8000
 
 # Comando por defecto para iniciar el servidor
 CMD ["node", "src/server.js"]
