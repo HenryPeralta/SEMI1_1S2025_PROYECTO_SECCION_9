@@ -2,6 +2,8 @@
 import { validateEmail } from '../utils/validateInput.js'
 import { comparePassword, hashPassword } from '../utils/bcryptUtils.js'
 import { getUserByUsername, createUser } from '../models/authModel.js'
+import { uploadImageToS3 } from '../services/s3Service.js'
+import { v4 as uuidv4 } from 'uuid'
 
 export const loginService = async ({ nombre_usuario, contrasena }) => {
   const user = await getUserByUsername(nombre_usuario)
@@ -59,11 +61,21 @@ export const registerService = async ({
 
   const hp = await hashPassword(contrasena)
 
+  const nombreFoto = uuidv4();
+  let url_image;
+
+  try {
+    url_image = await uploadImageToS3(imagen_perfil_url, nombreFoto);
+  } catch (error) {
+    console.error("Error al procesar la imagen:", error);
+    res.status(500).json({ error: 'Error al subir la imagen a S3' });
+  }
+
   const newUser = await createUser({
     nombre_usuario: nombre_usuario,
     correo: correo,
     contrasena: hp,
-    imagen_perfil_url: imagen_perfil_url
+    imagen_perfil_url: url_image
   })
 
   if (!newUser) {
@@ -79,5 +91,24 @@ export const registerService = async ({
     imagen_perfilUrl: newUser.imagen_perfil_url,
     fecha_registro: newUser.fecha_registro,
     fecha_modificacion: newUser.fecha_modificacion
+  }
+}
+
+export const loginServiceFaceId = async ({ nombre_usuario }) => {
+  const user = await getUserByUsername(nombre_usuario)
+
+  if (!user) {
+    throw new Error('Error, credenciales invalidas.', {
+      cause: { statusCode: 404 }
+    })
+  }
+
+  return {
+    id: user.id,
+    nombre_usuario: user.nombre_usuario,
+    correo: user.correo,
+    imagen_perfil_url: user.imagen_perfil_url,
+    fecha_registro: user.fecha_registro,
+    fecha_modificacion: user.fecha_modificacion
   }
 }

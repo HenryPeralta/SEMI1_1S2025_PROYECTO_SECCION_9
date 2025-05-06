@@ -42,7 +42,7 @@ const Registro = () => {
             correo: email,
             contrasena: password,
             confirmar_contrasena: confirmPassword,
-            imagen_perfil_url: "imagenPrueba",
+            imagen_perfil_url: profilePic,
         }
 
         try {
