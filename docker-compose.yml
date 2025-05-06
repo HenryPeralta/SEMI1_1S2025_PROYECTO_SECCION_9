@@ -5,6 +5,6 @@ services:
       context: ./nodejs-backend
       dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - '8000:8000'
     env_file:
       - ./nodejs-backend/.env
