@@ -2,7 +2,7 @@ import AWS from 'aws-sdk'
 process.loadEnvFile()
 
 export const {
-  PORT = 3000,
+  PORT = 8000,
   FRONTEND_URL,
   JWT_SECRET,
   DB_HOST,
