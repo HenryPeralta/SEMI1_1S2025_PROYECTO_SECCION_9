@@ -1,16 +1,4 @@
 services:
-  frontend:
-    container_name: frontend
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - '5173:5173'
-    environment:
-      - VITE_API_URL=http://localhost:3000
-    depends_on:
-      - backend
-
   backend:
     container_name: backend
     build:
@@ -19,4 +7,4 @@ services:
     ports:
       - '3000:3000'
     env_file:
-      - /nodejs-backend/.env
+      - ./nodejs-backend/.env
