@@ -7,6 +7,7 @@ import authRoutes from './routes/authRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import taskRoutes from './routes/taskRoutes.js'
 import fileRoutes from './routes/fileRoutes.js'
+import awsRoutes from './routes/awsRoutes.js'
 
 const app = express()
 
@@ -32,6 +33,9 @@ app.use('/task', taskRoutes)
 
 // Files
 app.use('/file', fileRoutes)
+
+// aws
+app.use('/aws', awsRoutes)
 
 app.get('/health', (req, res) => {
   res.status(200).send('OK')

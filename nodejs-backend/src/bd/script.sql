@@ -1,6 +1,9 @@
 DROP DATABASE IF EXISTS BDpractica2;
+
 CREATE DATABASE IF NOT EXISTS BDpractica2;
+
 USE BDpractica2;
+
 CREATE TABLE Usuarios (
   id INT AUTO_INCREMENT,
   nombre_usuario VARCHAR(255) NOT NULL,
@@ -13,6 +16,7 @@ CREATE TABLE Usuarios (
   CONSTRAINT UQ_Usuario UNIQUE (nombre_usuario),
   CONSTRAINT UQ_Correo UNIQUE (correo)
 );
+
 CREATE TABLE Tareas (
   id INT AUTO_INCREMENT,
   usuario_id INT,
@@ -24,6 +28,7 @@ CREATE TABLE Tareas (
   CONSTRAINT PK_Tarea PRIMARY KEY (id),
   CONSTRAINT FK_Tarea_Usuario FOREIGN KEY (usuario_id) REFERENCES Usuarios (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 CREATE TABLE Archivos (
   id INT AUTO_INCREMENT,
   usuario_id INT,

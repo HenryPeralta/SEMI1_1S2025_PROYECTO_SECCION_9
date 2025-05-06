@@ -1,51 +1,66 @@
-import { useState } from "react";
-import "../styles/Traductor.css";
-const API_URL = import.meta.env.VITE_API_URL;
+import { useState } from 'react'
+import '../styles/Traductor.css'
+const API_URL = import.meta.env.VITE_API_URL
 
 const Traductor = () => {
-  const [texto, setTexto] = useState("");
-  const [mensaje, setMensaje] = useState("");
-  const [textoTraducido, setTextoTraducido] = useState("");
-  const [audioDisponible, setAudioDisponible] = useState(false);
-  const [cargando, setCargando] = useState(false);
+  const [texto, setTexto] = useState('')
+  const [mensaje, setMensaje] = useState('')
+  const [textoTraducido, setTextoTraducido] = useState('')
+  const [audioDisponible, setAudioDisponible] = useState(false)
+  const [audioSrc, setAudioSrc] = useState('')
+  const [cargando, setCargando] = useState(false)
 
   const traducirYLeer = async () => {
     if (!texto.trim()) {
-      setMensaje("Escribe un texto para traducir.");
-      return;
+      setMensaje('Escribe un texto para traducir.')
+      return
     }
 
-    setCargando(true);
-    setTextoTraducido("");
-    setAudioDisponible(false);
-    setMensaje("");
+    setCargando(true)
+    setTextoTraducido('')
+    setAudioDisponible(false)
+    setMensaje('')
 
     try {
-      const response = await fetch(`${API_URL}/traducir`, {
-        method: "POST",
+      const response = await fetch(`${API_URL}/aws/traducir`, {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ texto }),
-      });
+        body: JSON.stringify({ text: texto, targetLanguage: 'en-us' })
+      })
 
-      if (!response.ok) throw new Error("Error en la respuesta del servidor");
+      if (!response.ok) throw new Error('Error en la respuesta del servidor')
 
-      const data = await response.json();
-      setTextoTraducido(data.texto_traducido);
-      setAudioDisponible(true);
+      const data = await response.json()
+
+      // Convertir el buffer de audio en un Blob
+      const audioBlob = new Blob(
+        [new Uint8Array(data.payload.translatedAudio.data)],
+        {
+          type: 'audio/mpeg'
+        }
+      )
+
+      // Crear una URL reproducible para el audio
+      const audioURL = URL.createObjectURL(audioBlob)
+      setAudioSrc(audioURL)
+
+      setTextoTraducido(data.payload.translatedText)
+      setAudioDisponible(true)
     } catch (error) {
-      console.error("Error al traducir:", error);
-      setMensaje("Ocurrió un error al procesar el texto.");
+      console.error('Error al traducir:', error)
+      setMensaje('Ocurrió un error al procesar el texto.')
     }
 
-    setCargando(false);
-  };
+    setCargando(false)
+  }
 
   return (
     <div className="traductor-container">
       <h2>Traducir y Escuchar Texto</h2>
-      <textarea className="textarea"
+      <textarea
+        className="textarea"
         cols="105"
         rows="5"
         placeholder="Escribe el texto aquí..."
@@ -53,7 +68,7 @@ const Traductor = () => {
         onChange={(e) => setTexto(e.target.value)}
       />
       <button onClick={traducirYLeer} disabled={cargando}>
-        {cargando ? "Procesando..." : "Traducir y Leer"}
+        {cargando ? 'Procesando...' : 'Traducir y Leer'}
       </button>
 
       {mensaje && <p className="error-message">{mensaje}</p>}
@@ -68,11 +83,11 @@ const Traductor = () => {
       {audioDisponible && (
         <>
           <h3>Reproducir Texto en Audio</h3>
-          <audio controls src={`${API_URL}/audio`} />
+          <audio controls src={audioSrc} />
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Traductor;
+export default Traductor
