@@ -78,3 +78,24 @@ audio {
         width: 100%;
     }
 }
+
+/* Add any additional styles here */
+.textarea {
+    width: 100%;
+    max-width: 775px;
+    background-color: #3a3a3a;
+    color: #ffffff;
+    border: 1px solid #555;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+    margin: 10px auto;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    resize: none;
+}
+
+.textarea::placeholder {
+    color: #aaaaaa;
+}

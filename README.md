@@ -1,10 +1,5 @@
 # Manual Técnico
 
-### TASKPLANNER
-Es una plataforma web enfocada en la organización académica, donde el usuario contará con un dashboard principal que incluye un calendario interactivo y la posibilidad de crear y gestionar cursos personalizados. Dentro de cada curso, el estudiante podrá almacenar archivos, crear tareas con fechas específicas, y registrar notas importantes relacionadas al contenido del curso, la plataforma contará con un apartado para la traducción de documentos en diferentes idiomas utilizando AWS Translate, con el fin de facilitar el acceso a contenidos en otros idiomas.
-
----
-
 ## Integrantes
 |             Nombre             |   Carnet  |
 | :----------------------------  | :------   |
@@ -16,95 +11,113 @@ Es una plataforma web enfocada en la organización académica, donde el usuario 
 
 ---
 
-## Arquitectura
+## Objetivos del proyecto
+El objetivo de este proyecto es proporcionar a los estudiantes una herramienta digital que les permita administrar de forma sencilla sus archivos y organizar sus tareas mediante recordatorios programados, ayudándoles a mantener un flujo de trabajo eficiente.
 
-La aplicación de TASKPLANNER se desplegó utilizando servicios de **AWS** estas implementaciones siguen la misma arquitectura de dos capas: una web estática consumiendo servicios desde backend con balanceo de carga.
+Además, se integran funcionalidades adicionales como la traducción de texto mediante **AWS Translate** y la lectura de texto en voz mediante **AWS Polly**, lo que amplía las posibilidades de uso en entornos educativos diversos.
 
-### AWS
-- IAM: Creación de roles y políticas específicas por servicio.
-- EC2: Dos instancias para backend en NodeJS y Python.
-- ELB: Balanceo de carga entre las instancias EC2.
-- S3: Almacenamiento de archivos estáticos y archivos de usuario.
-- RDS: Base de datos para gestión de usuarios y tareas.
-- Lambda: Funciones serverless para cargar archivos.
-- API Gateway: Exposición de funciones serverless vía HTTP.
-- Rekognition: Reconocimiento de imagenes.
-- SES: Envio de notificaciones al correo.
-- Polly: Generación de voz con IA.
-- Translate: Traducción de textos a otro idioma.
+Este proyecto está diseñado para ser escalable, permitiendo la incorporación de nuevas funcionalidades en el futuro con el fin de continuar apoyando el desarrollo académico de los estudiantes.
 
 ---
 
-## Usuarios IAM (AWS)
-
-A continuación, se describen los usuarios IAM creados, sus roles y políticas asignadas:
-
-### Usuario S3
-- **Políticas:**
-  - `AmazonS3FullAccess`
-  - `LambdaInvokeFunction`
-  - `APIGatewayInvokeFullAccess`
-
-### Usuario EC2
-- **Políticas:**
-  - `AmazonEC2FullAccess`
-  - `AmazonRDSFullAccess`
+## Descripción del proyecto
+**TASKPLANNER** es una plataforma web enfocada en la organización académica, diseñada para ayudar a los estudiantes a gestionar de manera eficiente sus actividades escolares. La aplicación ofrece un dashboard principal con un calendario interactivo y la posibilidad de crear y administrar cursos personalizados Dentro de cada curso, los estudiantes podrán almacenar archivos, crear tareas con fechas específicas, y registrar notas importantes relacionadas con el contenido del curso.
 
 ---
 
-## Capturas de Pantalla
+## Arquitectura del proyecto
+La arquitectura de **TASKPLANNER** se basa en un modelo de dos capas: una capa frontend desplegada como una aplicación web estática, y una capa backend gestionada mediante servicios de AWS. Esta arquitectura permite escalabilidad, seguridad y eficiencia en el uso de recursos.
 
-#### Buckets de Amazon S3
-![S3 Bucket](/IMG/S3.jpeg)
+#### Capa Frontend (Web Estática)
+- **Amazon S3** aloja los archivos estáticos de la interfaz web. El frontend consume APIs expuestas por el backend para funcionalidades dinámicas.
 
-#### Instancias de EC2
-![EC2 Instances](/IMG/EC2.jpeg)
+#### Capa Backend
+- **Amazon EC2** aloja la aplicación backend desarrollada en Node.js, encargada de manejar la lógica del sistema.
 
-#### Balanceador de Carga (ELB)
-![Load Balancer](/IMG/elb.jpeg)
+- **Elastic Load Balancer (ELB)** distribuye el tráfico entrante entre múltiples instancias EC2 para garantizar alta disponibilidad.
 
-#### Base de Datos (RDS)
-![RDS](/IMG/BD.jpeg)
+- **Amazon RDS** gestiona la base de datos relacional, donde se almacenan usuarios, tareas, recordatorios, notas y relaciones entre cursos.
 
-#### Funciones Lambda
-![Lambda](/IMG/funciones.jpeg)
+#### Funcionalidades Serverless
+- **AWS Lambda gestiona** tareas específicas como la carga de archivos.
+Amazon API Gateway expone estas funciones serverless a través de endpoints HTTP seguros.
 
-#### API Gateway
-![API Gateway](/IMG/archivos_node.jpeg)
+#### Almacenamiento de Archivos
+- **Amazon S3** también es utilizado para almacenar archivos personales subidos por los usuarios (PDFs, imágenes, etc.).
 
-![API Gateway](/IMG/cargar_node.jpeg)
+#### Funcionalidades Inteligentes
+- **Amazon Translate** permite traducir textos a múltiples idiomas desde la plataforma.
+
+- **Amazon Polly** genera audios en voz natural para facilitar la lectura de textos.
+
+- **Amazon Rekognition** permite el análisis y reconocimiento de imágenes (por ejemplo, para extraer texto o validar contenido).
+
+#### Notificaciones
+- **Amazon SES (Simple Email Service)** se utiliza para el envío de notificaciones por correo electrónico a los usuarios, como recordatorios de tareas o confirmaciones.
+
+#### Seguridad y Accesos
+- **AWS IAM (Identity and Access Management)** define políticas de acceso específicas por servicio, garantizando que cada componente tenga los permisos mínimos necesarios para operar.
 
 ---
 
-## Conclusiones
-s
+## Presupuesto
+
+![Budget](/IMG/BD.jpeg)
+
+---
+
+## Servicios Utilizados
+
+- **IAM:** Creación de roles y políticas específicas por servicio.
+- **EC2:** Creación de instancia para backend en NodeJS.
+- **ELB:** Balanceo de carga entre las instancias EC2.
+- **S3:** Almacenamiento de archivos estáticos y archivos de usuario.
+- **RDS:** Base de datos para gestión de usuarios y tareas.
+- **Lambda:** Funciones serverless para cargar archivos.
+- **API Gateway:** Exposición de funciones serverless vía HTTP.
+- **Rekognition:** Reconocimiento de imagenes.
+- **SES:** Envio de notificaciones al correo.
+- **Polly:** Generación de voz con IA.
+- **Translate:** Traducción de textos a otro idioma.
 
 ---
 
 # Manual de Usuario
-En este apartado se muestran imagenes del funcionamiento que tiene la aplicación con los servicios desplegados en la nube, el manual sirve como guia para el usuario para su funcionamiento.
+En este apartado se muestran imagenes del funcionamiento que tiene la aplicación con los servicios desplegados en la nube, el manual sirve como guia para el usuario para entender el funcionamiento de la aplicación.
 
 ---
-### Login
-![](/IMG/Login.png)
-S
+## Objetivos del manual
+Explicar de manera clara y concisa el funcionamiento general de la aplicación **TASKPLANNER**.
+
+Guiar al usuario en el proceso de navegación por la plataforma, desde el acceso inicial hasta el uso completo de sus funcionalidades.
+
+Describir el uso de herramientas adicionales como la traducción de texto mediante **AWS Translate** y la lectura en voz alta con **AWS Polly**.
+
+---
+## Descripción de la aplicación
+**TASKPLANNER** es una aplicación web diseñada para apoyar a estudiantes en la gestión de su vida académica. Permite organizar cursos, tareas, archivos y notas dentro de una interfaz intuitiva con un calendario interactivo. Además, incorpora herramientas complementarias como traducción de texto mediante **AWS Translate** y lectura en voz con **AWS Polly**, ofreciendo una experiencia más accesible y completa para el aprendizaje.
 
 ---
 ### Register
 ![](/IMG/Register.png)
-S
+En este apartado el usuario es capaz de crear un nuevo usuario si es que aun no ha creado una cuenta, se le pedirán datos personales para crear su cuenta.
+
+---
+### Login
+![](/IMG/Login.png)
+En este apartado si el usuario no tiene un cuenta puede crear una en el apartado de registrar, si el usuario ya posee una cuenta, al ingresar sus credenciales puede acceder a las funcionalidades de la aplicación.
 
 ---
 ### Calendario
-![](/IMG/Calendario.jpg)
+![](/IMG/Calendario.png)
 En este apartado el usuario puede crear sus recordatorios de actividades para tal fecha, al crear una tarea al usuario se le notificará al correo que una tarea fue creada.
 
 ---
 ### Archivos
-![](/IMG/Archivos.jpeg)
-S
+![](/IMG/Archivos.png)
+En este apartado el usuario puede cargar archivos para almacenarlos en este apartado, puede subir pdf, imagenes y archivos de texto, una vez estos archivos esten cargados, el usuario podra visualizarlos o descargar los archivos que esten en este apartado.
 
 ---
 ### Traductor
-![](/IMG/Traductor.jpeg)
-S
+![](/IMG/Traductor.png)
+En este apartado el usuario podra escribir el texto que necesite para que la aplicación se lo traduzca a otro idioma, y se generará un audio el cual contiene el texto escrito que será leido por una voz generada por IA.
