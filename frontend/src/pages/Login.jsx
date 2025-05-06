@@ -149,7 +149,7 @@ const Login = () => {
 
             <div className="face-login">
                 {!showFaceLogin ? (
-                    <button onClick={() => setShowFaceLogin(true)}>Iniciar sesión con Face ID</button>
+                    <button className="buttonID" onClick={() => setShowFaceLogin(true)}>Iniciar sesión con Face ID</button>
                 ) : (
                     <div className="webcam-section">
                         {!captured ? (
