@@ -146,6 +146,23 @@ const Tareas = () => {
 
     const cerrarModal = () => setTareaSeleccionada(null);
 
+    const enviarSES = async (to, subject, body) => {
+        try {
+            const response = await fetch(`${API_URL}/aws/send-email/`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ to, subject, body }),
+            });
+            if (!response.ok) {
+                throw new Error("Error al enviar el correo");
+            }
+            const data = await response.json();
+            console.log("Correo enviado exitosamente:", data);
+        } catch (error) {
+            console.error("Error al enviar el correo:", error);
+        }
+    };
+
     return (
         <div className="tareas-container">
             <h2>Calendario de Tareas</h2>
@@ -192,7 +209,7 @@ const Tareas = () => {
                         required
                     />
                     <p><strong>Fecha seleccionada:</strong> {nuevaTarea.fecha}</p>
-                    <button type="submit">Agregar Tarea</button>
+                    <button onClick={enviarSES} type="submit">Agregar Tarea</button>
                 </form>
             )}
 
