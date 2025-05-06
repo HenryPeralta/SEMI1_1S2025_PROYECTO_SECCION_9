@@ -120,4 +120,4 @@ En este apartado el usuario puede cargar archivos para almacenarlos en este apar
 ---
 ### Traductor
 ![](/IMG/Traductor.png)
-En este apartado el usuario podra escribir el texto que necesite para que la aplicación se lo traduzca a otro idioma, y se generará un audio el cual contiene el texto escrito que será leido por una voz generada por IA.
+En este apartado el usuario podra escribir cualquier texto en español que necesite para que la aplicación se lo traduzca a otro idioma, y se generará un audio el cual contiene el texto escrito que será leido por una voz generada por IA.
